@@ -12,12 +12,12 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: eu-west-1
   iamRoleStatements:
-    - ${file(iam/AuctionsTableIAM):AuctionsTableIAM}
+    - ${file(iam/AuctionsTableIAM.yml):AuctionsTableIAM}
 
 resources:
   Resources:
-    AuctionsTable: ${file(resources/AuctionsTable):AuctionsTable}
-
+    AuctionsTable: ${file(resources/AuctionsTable.yml):AuctionsTable}
+    
 functions:
   createAuction:
     handler: src/handlers/createAuction.handler
