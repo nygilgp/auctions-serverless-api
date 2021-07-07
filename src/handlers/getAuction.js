@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
-import createError from 'http-errors';
 import commonMiddleware from '../lib/commonMiddleware';
+import createError from 'http-errors';
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -10,15 +10,16 @@ export async function getAuctionById(id) {
   try {
     const result = await dynamodb.get({
       TableName: process.env.AUCTIONS_TABLE_NAME,
-      Key: { id }
+      Key: { id },
     }).promise();
-    auction = result.Item ;
+
+    auction = result.Item;
   } catch (error) {
     console.error(error);
     throw new createError.InternalServerError(error);
   }
 
-  if(!auction) {
+  if (!auction) {
     throw new createError.NotFound(`Auction with ID "${id}" not found!`);
   }
 
@@ -27,7 +28,7 @@ export async function getAuctionById(id) {
 
 async function getAuction(event, context) {
   const { id } = event.pathParameters;
-  const auction = getAuctionById(id);
+  const auction = await getAuctionById(id);
 
   return {
     statusCode: 200,
@@ -36,5 +37,3 @@ async function getAuction(event, context) {
 }
 
 export const handler = commonMiddleware(getAuction);
-
-
