@@ -1,6 +1,8 @@
 import AWS from 'aws-sdk';
 import createError from 'http-errors';
+import validator from '@middy/validator';
 import commonMiddleware from '../lib/commonMiddleware';
+import schema from '../lib/schemas/getAuctions';
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -13,7 +15,7 @@ async function getAuctions(event, context) {
 		IndexName: 'statusAndEndDate',
         KeyConditionExpression: '#status = :status',
         ExpressionAttributeValues: {
-			':status': status ?? 'OPEN'
+			':status': status
 		},
         ExpressionAttributeNames: {
             '#status': 'status',// as status is reserved name
@@ -34,6 +36,11 @@ async function getAuctions(event, context) {
   };
 }
 
-export const handler = commonMiddleware(getAuctions);
-
-
+export const handler = commonMiddleware(getAuctions)
+	.use(validator({
+		inputSchema: schema,
+		ajvOptions: {
+			useDefaults: true,
+			strict: false,
+		},
+	}));
