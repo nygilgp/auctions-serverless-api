@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "a55f43db-856f-4eeb-aed0-fd5a9535ae57",
+		"name": "Auction Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Auction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"OK cars.\"\n}"
+				},
+				"url": {
+					"raw": "{{AUCTIONS_HOST}}/auction",
+					"host": [
+						"{{AUCTIONS_HOST}}"
+					],
+					"path": [
+						"auction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Auctions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{AUCTIONS_HOST}}/auctions",
+					"host": [
+						"{{AUCTIONS_HOST}}"
+					],
+					"path": [
+						"auctions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Auction by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{AUCTIONS_HOST}}/auction/790627ff-c177-446b-9c6d-0fa6be6d7662",
+					"host": [
+						"{{AUCTIONS_HOST}}"
+					],
+					"path": [
+						"auction",
+						"790627ff-c177-446b-9c6d-0fa6be6d7662"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place bid",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{AUCTIONS_HOST}}/auction/35e4ae3c-4fad-4d51-9b4c-28020865593f/bid",
+					"host": [
+						"{{AUCTIONS_HOST}}"
+					],
+					"path": [
+						"auction",
+						"35e4ae3c-4fad-4d51-9b4c-28020865593f",
+						"bid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Auction picture",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{AUCTIONS_HOST}}/auction/35e4ae3c-4fad-4d51-9b4c-28020865593f/picture",
+					"host": [
+						"{{AUCTIONS_HOST}}"
+					],
+					"path": [
+						"auction",
+						"35e4ae3c-4fad-4d51-9b4c-28020865593f",
+						"picture"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
